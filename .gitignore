@@ -1,0 +1,10 @@
+# Visual Studio .vs folder
+.vs/
+
+# Visual Studio temporary files
+*.vsixmanifest
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
