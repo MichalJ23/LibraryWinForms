@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = LibraryGUI
-build_property.ProjectDir = C:\Users\User\source\repos\LibraryApp\src\LibraryGUI\
+build_property.ProjectDir = C:\Users\CeX\Desktop\VI semestr\LibraryWinForms\src\LibraryGUI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

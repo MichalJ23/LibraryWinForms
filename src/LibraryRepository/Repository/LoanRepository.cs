@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class LoanRepository : ILoanRepository
+    public class LoanRepository : ILoanRepository
     {
         private readonly AppDbContext _context;
         public LoanRepository()
         {
             _context = new AppDbContext();
         }
+        public List<Loan> GetAllLoans()
+        {
+            return _context.Loans.ToList();
+        }
         public void AddLoan(Loan loan)
         {
             _context.Loans.Add(loan);
             _context.SaveChanges();
         }
-
         public void DeleteLoan(Loan loan)
         {
             var loanToRemove = _context.Loans.FirstOrDefault(l => l.Id == loan.Id);

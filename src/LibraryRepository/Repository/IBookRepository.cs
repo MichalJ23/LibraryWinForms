@@ -1,4 +1,5 @@
 ﻿using LibraryRepository.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace LibraryRepository.Repository
 {
     internal interface IBookRepository
     {
+        public List<Book> GetAllBooks();
         void AddBook(Book book);
         void DeleteBook(Book book);
     }

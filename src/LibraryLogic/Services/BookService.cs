@@ -8,12 +8,17 @@ using LibraryRepository.Repository;
 
 namespace LibraryLogic.Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
         private readonly BookRepository _bookRepository;
         public BookService() 
         {
             _bookRepository = new BookRepository();
+        }
+
+        public List<Book> GetAllBooks()
+        {
+            return new List<Book>();
         }
 
         public void CreateBook(Book book)
@@ -24,6 +29,21 @@ namespace LibraryLogic.Services
             }
 
             _bookRepository.AddBook(book);
+        }
+
+        public void DeleteBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IBookService.GetAllBooks()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBook(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
