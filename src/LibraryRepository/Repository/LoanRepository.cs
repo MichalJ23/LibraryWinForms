@@ -7,27 +7,26 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class FineRepository : IFineRepository
+    internal class LoanRepository : ILoanRepository
     {
         private readonly AppDbContext _context;
-
-        public FineRepository()
+        public LoanRepository()
         {
             _context = new AppDbContext();
         }
-        public void AddFine(Fine fine)
+        public void AddLoan(Loan loan)
         {
-            _context.Fines.Add(fine);
+            _context.Loans.Add(loan);
             _context.SaveChanges();
         }
 
-        public void RemoveFine(Fine fine)
+        public void DeleteLoan(Loan loan)
         {
-            var fineToRemove = _context.Fines.FirstOrDefault(f => f.Id == fine.Id);
+            var loanToRemove = _context.Loans.FirstOrDefault(l => l.Id == loan.Id);
 
-            if(fineToRemove is not null)
+            if (loanToRemove is not null) 
             {
-                _context.Remove(fine);
+                _context.Loans.Remove(loanToRemove);
                 _context.SaveChanges();
             }
         }

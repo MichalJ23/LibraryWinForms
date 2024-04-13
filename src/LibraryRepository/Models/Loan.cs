@@ -10,8 +10,8 @@ namespace LibraryRepository.Models
     public class Loan
     {
         public int Id { get; set; }
-        public DateTime LoanDate { get; set; }
-        public DateTime ReturnDate { get; set; }
+        public DateOnly LoanDate { get; set; }
+        public DateOnly ReturnDate { get; set; }
 
         public int ReaderId { get; set; }
         public Reader Reader { get; set; }
