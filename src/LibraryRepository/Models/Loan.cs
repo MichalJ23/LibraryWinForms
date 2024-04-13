@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Models
 {
-    internal class Loan
+    public class Loan
     {
         public int Id { get; set; }
         public DateTime LoanDate { get; set; }

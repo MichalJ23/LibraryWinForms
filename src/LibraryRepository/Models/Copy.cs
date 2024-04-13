@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Models
 {
-    internal class Copy
+    public class Copy
     {
         public int Id { get; set; }
         public int TotalQuantity { get; set; }

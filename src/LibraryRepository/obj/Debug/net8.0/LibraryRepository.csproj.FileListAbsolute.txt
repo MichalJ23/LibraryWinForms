@@ -26,3 +26,4 @@ C:\Users\User\source\repos\LibraryApp\src\LibraryRepository\obj\Debug\net8.0\ref
 C:\Users\User\source\repos\LibraryApp\src\LibraryRepository\obj\Debug\net8.0\LibraryRepository.pdb
 C:\Users\User\source\repos\LibraryApp\src\LibraryRepository\obj\Debug\net8.0\LibraryRepository.genruntimeconfig.cache
 C:\Users\User\source\repos\LibraryApp\src\LibraryRepository\obj\Debug\net8.0\ref\LibraryRepository.dll
+C:\Users\User\source\repos\LibraryApp\src\LibraryRepository\obj\Debug\net8.0\LibraryRepository.sourcelink.json

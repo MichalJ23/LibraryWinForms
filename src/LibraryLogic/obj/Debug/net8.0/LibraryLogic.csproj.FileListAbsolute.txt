@@ -1,0 +1,16 @@
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\bin\Debug\net8.0\LibraryLogic.deps.json
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\bin\Debug\net8.0\LibraryLogic.dll
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\bin\Debug\net8.0\LibraryLogic.pdb
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\bin\Debug\net8.0\LibraryRepository.dll
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\bin\Debug\net8.0\LibraryRepository.pdb
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.AssemblyInfo.cs
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.sourcelink.json
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryL.FD339828.Up2Date
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.dll
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\refint\LibraryLogic.dll
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\LibraryLogic.pdb
+C:\Users\User\source\repos\LibraryApp\src\LibraryLogic\obj\Debug\net8.0\ref\LibraryLogic.dll

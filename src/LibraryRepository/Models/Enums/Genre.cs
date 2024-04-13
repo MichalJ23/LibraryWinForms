@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Models.Nowy_folder
 {
-    internal enum Genre
+    public enum Genre
     {
         Powieść,
         Kryminał,

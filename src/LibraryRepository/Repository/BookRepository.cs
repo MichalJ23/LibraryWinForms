@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class BookRepository : IBookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly AppDbContext _context;
-        public BookRepository(AppDbContext context)
+
+        public BookRepository()
         {
-            _context = context;
+            _context = new AppDbContext();
         }
 
         public void AddBook(Book book)

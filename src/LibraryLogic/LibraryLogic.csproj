@@ -10,8 +10,4 @@
     <ProjectReference Include="..\LibraryRepository\LibraryRepository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

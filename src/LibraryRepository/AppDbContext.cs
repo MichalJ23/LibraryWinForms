@@ -14,11 +14,12 @@ namespace LibraryRepository
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Copy> Copies { get; set; }
         public DbSet<Fine> Fines { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
         public string DbPath { get; }
         public AppDbContext()
         {
-            var projectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var projectDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString();
 
             DbPath = System.IO.Path.Combine(projectDirectory, "library.db");
         }

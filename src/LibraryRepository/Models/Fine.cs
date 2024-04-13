@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Models
 {
-    internal class Fine
+    public class Fine
     {
         public int Id { get; set; }
         public int LoanId { get; set; }
