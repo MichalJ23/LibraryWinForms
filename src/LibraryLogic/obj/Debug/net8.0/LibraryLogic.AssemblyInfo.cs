@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("LibraryRepository")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("LibraryLogic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32fe6b47ad1c2aece16154c430d62ea1dc694c7a")]
-[assembly: System.Reflection.AssemblyProductAttribute("LibraryRepository")]
-[assembly: System.Reflection.AssemblyTitleAttribute("LibraryRepository")]
+[assembly: System.Reflection.AssemblyProductAttribute("LibraryLogic")]
+[assembly: System.Reflection.AssemblyTitleAttribute("LibraryLogic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
