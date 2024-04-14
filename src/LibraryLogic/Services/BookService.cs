@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryRepository.Models;
@@ -18,7 +19,7 @@ namespace LibraryLogic.Services
 
         public List<Book> GetAllBooks()
         {
-            return new List<Book>();
+            return _bookRepository.GetAllBooks();
         }
 
         public void CreateBook(Book book)
@@ -33,17 +34,12 @@ namespace LibraryLogic.Services
 
         public void DeleteBook(Book book)
         {
-            throw new NotImplementedException();
-        }
+            if (book is null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
 
-        void IBookService.GetAllBooks()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteBook(int id)
-        {
-            throw new NotImplementedException();
+            _bookRepository.DeleteBook(book);
         }
     }
 }
