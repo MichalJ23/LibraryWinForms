@@ -36,14 +36,14 @@
             label3 = new Label();
             dataGridView1 = new DataGridView();
             groupBox1 = new GroupBox();
-            textBox_Genre = new TextBox();
             label1 = new Label();
             label4 = new Label();
             label5 = new Label();
             groupBox2 = new GroupBox();
             button_deleteBook = new Button();
-            textBox_ID = new TextBox();
             label6 = new Label();
+            comboBox_genre = new ComboBox();
+            comboBox_ID = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -62,7 +62,7 @@
             // 
             // authorTxtBox
             // 
-            authorTxtBox.Location = new Point(167, 45);
+            authorTxtBox.Location = new Point(166, 43);
             authorTxtBox.Margin = new Padding(2);
             authorTxtBox.Name = "authorTxtBox";
             authorTxtBox.Size = new Size(159, 23);
@@ -88,7 +88,7 @@
             // 
             // titleTxtBox
             // 
-            titleTxtBox.Location = new Point(167, 16);
+            titleTxtBox.Location = new Point(166, 16);
             titleTxtBox.Margin = new Padding(2);
             titleTxtBox.Name = "titleTxtBox";
             titleTxtBox.Size = new Size(159, 23);
@@ -114,7 +114,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox_Genre);
+            groupBox1.Controls.Add(comboBox_genre);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(addBookBtn);
@@ -129,14 +129,6 @@
             groupBox1.TabIndex = 17;
             groupBox1.TabStop = false;
             groupBox1.Text = "Dodawanie";
-            // 
-            // textBox_Genre
-            // 
-            textBox_Genre.Location = new Point(167, 72);
-            textBox_Genre.Margin = new Padding(2);
-            textBox_Genre.Name = "textBox_Genre";
-            textBox_Genre.Size = new Size(159, 23);
-            textBox_Genre.TabIndex = 16;
             // 
             // label1
             // 
@@ -167,8 +159,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(comboBox_ID);
             groupBox2.Controls.Add(button_deleteBook);
-            groupBox2.Controls.Add(textBox_ID);
             groupBox2.Controls.Add(label6);
             groupBox2.Location = new Point(12, 409);
             groupBox2.Name = "groupBox2";
@@ -187,13 +179,6 @@
             button_deleteBook.UseVisualStyleBackColor = true;
             button_deleteBook.Click += button_deleteBook_Click;
             // 
-            // textBox_ID
-            // 
-            textBox_ID.Location = new Point(167, 16);
-            textBox_ID.Name = "textBox_ID";
-            textBox_ID.Size = new Size(159, 23);
-            textBox_ID.TabIndex = 0;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -202,6 +187,22 @@
             label6.Size = new Size(88, 15);
             label6.TabIndex = 2;
             label6.Text = "Podaj ID książki";
+            // 
+            // comboBox_genre
+            // 
+            comboBox_genre.FormattingEnabled = true;
+            comboBox_genre.Location = new Point(166, 71);
+            comboBox_genre.Name = "comboBox_genre";
+            comboBox_genre.Size = new Size(160, 23);
+            comboBox_genre.TabIndex = 16;
+            // 
+            // comboBox_ID
+            // 
+            comboBox_ID.FormattingEnabled = true;
+            comboBox_ID.Location = new Point(167, 16);
+            comboBox_ID.Name = "comboBox_ID";
+            comboBox_ID.Size = new Size(160, 23);
+            comboBox_ID.TabIndex = 17;
             // 
             // BooksForm
             // 
@@ -234,13 +235,13 @@
         private Label label3;
         private DataGridView dataGridView1;
         private GroupBox groupBox1;
-        private TextBox textBox_Genre;
         private Label label1;
         private Label label4;
         private Label label5;
         private GroupBox groupBox2;
         private Button button_deleteBook;
-        private TextBox textBox_ID;
         private Label label6;
+        private ComboBox comboBox_genre;
+        private ComboBox comboBox_ID;
     }
 }

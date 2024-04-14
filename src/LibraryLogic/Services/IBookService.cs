@@ -9,8 +9,8 @@ namespace LibraryLogic.Services
 {
     internal interface IBookService
     {
-        void GetAllBooks();
+        public List<Book> GetAllBooks();
         void CreateBook(Book book);
-        void DeleteBook(int id);
+        void DeleteBook(Book book);
     }
 }

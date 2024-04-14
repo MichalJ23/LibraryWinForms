@@ -39,6 +39,8 @@ namespace LibraryGUI
             };
             _readerService.CreateReader(reader);
 
+            MessageBox.Show("Czytelnik została pomyślnie dodana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             dataGridView1.DataSource = _readerService.GetAllReaders();
             comboBox1.DataSource = _readerService.GetAllReaders();
         }
