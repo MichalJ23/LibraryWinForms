@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class ReaderRepository : IReaderRepository
+    public class ReaderRepository : IReaderRepository
     {
         private readonly AppDbContext _context;
         public ReaderRepository()
         {
             _context = new AppDbContext();
+        }
+        public List<Reader> GetAllReaders()
+        {
+            return _context.Readers.ToList();
         }
         public void AddReader(Reader reader)
         {

@@ -1205,19 +1205,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\CeX\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\LibraryApp\\src\\LibraryLogic\\LibraryLogic.csproj",
+      "projectUniqueName": "C:\\Users\\CeX\\Desktop\\VI semestr\\LibraryWinForms\\src\\LibraryLogic\\LibraryLogic.csproj",
       "projectName": "LibraryLogic",
-      "projectPath": "C:\\Users\\User\\source\\repos\\LibraryApp\\src\\LibraryLogic\\LibraryLogic.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\LibraryApp\\src\\LibraryLogic\\obj\\",
+      "projectPath": "C:\\Users\\CeX\\Desktop\\VI semestr\\LibraryWinForms\\src\\LibraryLogic\\LibraryLogic.csproj",
+      "packagesPath": "C:\\Users\\CeX\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\CeX\\Desktop\\VI semestr\\LibraryWinForms\\src\\LibraryLogic\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\CeX\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1231,8 +1236,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\User\\source\\repos\\LibraryApp\\src\\LibraryRepository\\LibraryRepository.csproj": {
-              "projectPath": "C:\\Users\\User\\source\\repos\\LibraryApp\\src\\LibraryRepository\\LibraryRepository.csproj"
+            "C:\\Users\\CeX\\Desktop\\VI semestr\\LibraryWinForms\\src\\LibraryRepository\\LibraryRepository.csproj": {
+              "projectPath": "C:\\Users\\CeX\\Desktop\\VI semestr\\LibraryWinForms\\src\\LibraryRepository\\LibraryRepository.csproj"
             }
           }
         }

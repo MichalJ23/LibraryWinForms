@@ -9,6 +9,7 @@ namespace LibraryRepository.Repository
 {
     internal interface ILoanRepository
     {
+        List<Loan> GetAllLoans();
         void AddLoan(Loan loan);
         void DeleteLoan(Loan loan);
     }

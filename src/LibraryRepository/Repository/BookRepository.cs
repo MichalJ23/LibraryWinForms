@@ -16,6 +16,11 @@ namespace LibraryRepository.Repository
             _context = new AppDbContext();
         }
 
+        public List<Book> GetAllBooks()
+        {
+            return _context.Books.ToList();
+        }
+
         public void AddBook(Book book)
         {
             _context.Books.Add(book);
