@@ -76,6 +76,7 @@ namespace LibraryGUI
                 MessageBox.Show("Książka została pomyślnie usunięta.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 dataGridView1.DataSource = _bookService.GetAllBooks();
+                comboBox_ID.DataSource = _bookService.GetAllBooks();
             }
             else
             {
