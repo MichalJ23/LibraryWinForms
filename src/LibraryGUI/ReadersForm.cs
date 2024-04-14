@@ -40,6 +40,7 @@ namespace LibraryGUI
             _readerService.CreateReader(reader);
 
             dataGridView1.DataSource = _readerService.GetAllReaders();
+            comboBox1.DataSource = _readerService.GetAllReaders();
         }
 
         private void button_deleteReader_Click(object sender, EventArgs e)
@@ -55,6 +56,8 @@ namespace LibraryGUI
                 comboBox1.DataSource = _readerService.GetAllReaders();
 
                 MessageBox.Show("Czytelnik został pomyślnie usunięty.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                dataGridView1.DataSource = _readerService.GetAllReaders();
             }
             else
             {

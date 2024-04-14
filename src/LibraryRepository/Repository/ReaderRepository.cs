@@ -31,6 +31,7 @@ namespace LibraryRepository.Repository
             if (readerToDelete != null)
             {
                 _context.Readers.Remove(readerToDelete);
+                _context.SaveChanges();
             }
         }
     }
