@@ -7,27 +7,77 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class CopyRepository : ICopyRepository
+    public class CopyRepository : ICopyRepository
     {
         private readonly AppDbContext _context;
-        public CopyRepository(AppDbContext appDbContext) 
+        public CopyRepository() 
         {
-            _context = appDbContext;
+            _context = new AppDbContext();
         }
-        public void AddCopy(Copy copy)
+        public List<Copy> GetAllCopies()
         {
-            _context.Copies.Add(copy);
+            return _context.Copies.ToList();
+        }
+        public void AddCopy(int bookId, int quantity)
+        {
+            var bookCopy = _context.Copies.FirstOrDefault(c => c.BookId == bookId);
+
+            if (bookCopy != null)
+            {
+                bookCopy.TotalQuantity += quantity;
+                bookCopy.AvailableQuantity += quantity;
+            }
+            else
+            {
+                var book = _context.Books.Find(bookId);
+
+                if (book != null)
+                {
+                    var copy = new Copy
+                    {
+                        BookId = bookId,
+                        TotalQuantity = quantity,
+                        AvailableQuantity = quantity
+                    };
+
+                    _context.Copies.Add(copy);
+                }
+                else
+                {
+                    throw new ArgumentException("Książka o podanym ID nie istnieje.");
+                }
+            }
+
             _context.SaveChanges();
         }
 
-        public void DeleteCopy(Copy copy)
+        public void DeleteCopy(int copyId, int quantity)
         {
-            var copyToRemove = _context.Copies.FirstOrDefault( c => c.Id == copy.Id );
-            if (copyToRemove != null)
+            var copy = _context.Copies.Find(copyId);
+
+            if (copy != null)
             {
-                _context.Copies.Remove(copyToRemove);
-                _context.SaveChanges();
+                if (copy.TotalQuantity >= quantity && copy.AvailableQuantity >= quantity)
+                {
+                    copy.TotalQuantity -= quantity;
+                    copy.AvailableQuantity -= quantity;
+
+                    if (copy.TotalQuantity == 0)
+                    {
+                        _context.Copies.Remove(copy);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Podana ilość egzemplarzy do usunięcia przekracza dostępną ilość.");
+                }
             }
+            else
+            {
+                throw new ArgumentException("Egzemplarz o podanym ID nie istnieje.");
+            }
+
+            _context.SaveChanges();
         }
     }
 }

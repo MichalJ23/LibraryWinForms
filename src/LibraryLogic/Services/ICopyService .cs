@@ -1,16 +1,17 @@
 ﻿using LibraryRepository.Models;
+using LibraryRepository.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryRepository.Repository
+namespace LibraryLogic.Services
 {
-    internal interface ICopyRepository
+    internal interface ICopyService
     {
         public List<Copy> GetAllCopies();
-        void AddCopy(int bookId, int quantity);
-        void DeleteCopy(int copyId, int quantity);
+        public void AddCopy(int bookId, int quantity);
+        void DeleteCopy(int bookId, int quantity);
     }
 }
