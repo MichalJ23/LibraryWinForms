@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class FineRepository : IFineRepository
+    public class FineRepository : IFineRepository
     {
         private readonly AppDbContext _context;
 
         public FineRepository()
         {
             _context = new AppDbContext();
+        }
+        public List<Fine> GetAllFines()
+        {
+            return _context.Fines.ToList();
         }
         public void AddFine(Fine fine)
         {

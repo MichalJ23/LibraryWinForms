@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryRepository.Repository
+namespace LibraryLogic.Services
 {
-    internal interface IFineRepository
+    internal interface IFineService
     {
         public List<Fine> GetAllFines();
         void AddFine(Fine fine);
-        void RemoveFine(Fine fine);
+        void DeleteFine(Fine fine);
     }
 }
