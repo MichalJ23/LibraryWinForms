@@ -11,6 +11,7 @@ namespace LibraryRepository.Repository
     {
         List<Loan> GetAllLoans();
         void AddLoan(Loan loan);
-        void DeleteLoan(Loan loan);
+        void DeleteLoan(int loanId);
+        Loan GetLoanById(int loanId);
     }
 }

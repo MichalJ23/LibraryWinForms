@@ -10,8 +10,8 @@ namespace LibraryLogic.Services
 {
     internal interface ILoanService
     {
-        public List<Loan> GetAllLoans();
-        void CreateLoan(Loan loan);
-        void DeleteLoan(Loan loan);
+        List<Loan> GetAllLoans();
+        void AddLoan(int readerId, int bookId, DateTime loanDate);
+        void ReturnLoan(int loanId);
     }
 }

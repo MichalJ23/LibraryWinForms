@@ -8,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace LibraryLogic.Services
 {
-    internal interface ICopyService
+    public interface ICopyService
     {
-        public List<Copy> GetAllCopies();
-        public void AddCopy(int bookId, int quantity);
-        void DeleteCopy(int bookId, int quantity);
+        List<Copy> GetAllCopies();
+        void AddCopy(int bookId, int quantity);
+        void DeleteCopy(int copyId, int quantity);
+        IEnumerable<Book> GetBooksAvailableForLoan();
+        int GetCopyIdByBookId(int bookId);
+        void IncrementAvailableQuantityForCopy(int copyId);
+        void DecrementAvailableQuantityForCopy(int copyId);
     }
 }

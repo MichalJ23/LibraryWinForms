@@ -34,5 +34,10 @@ namespace LibraryRepository.Repository
                 _context.SaveChanges();
             }
         }
+
+        public Reader GetReaderById(int id)
+        {
+            return _context.Readers.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

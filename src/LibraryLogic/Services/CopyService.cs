@@ -12,9 +12,11 @@ namespace LibraryLogic.Services
     public class CopyService : ICopyService
     {
         private readonly CopyRepository _copyRepository;
+        private readonly BookRepository _bookRepository;
         public CopyService() 
         {
             _copyRepository = new CopyRepository();
+            _bookRepository = new BookRepository();
         }
 
         public List<Copy> GetAllCopies()
@@ -40,6 +42,35 @@ namespace LibraryLogic.Services
             }
 
             _copyRepository.DeleteCopy(copyId, quantity);
+        }
+
+        public IEnumerable<Book> GetBooksAvailableForLoan()
+        {
+            var copiesAvailable = _copyRepository.GetAllCopies().Where(copy => copy.AvailableQuantity > 0);
+
+            var bookIdsAvailable = copiesAvailable.Select(copy => copy.BookId).Distinct();
+
+            var booksAvailable = _bookRepository.GetAllBooks().Where(book => bookIdsAvailable.Contains(book.Id));
+
+            return booksAvailable;
+        }
+
+        public int GetCopyIdByBookId(int bookId)
+        {
+            var copy = _copyRepository.GetAllCopies().FirstOrDefault(c => c.BookId == bookId);
+            var copyId = copy.Id;
+
+            return copyId;
+        }
+
+        public void IncrementAvailableQuantityForCopy(int copyId)
+        {
+             _copyRepository.IncrementCopiesAmount(copyId);
+        }
+
+        public void DecrementAvailableQuantityForCopy(int copyId)
+        {
+            _copyRepository.DecrementCopiesAmount(copyId);
         }
     }
 }
