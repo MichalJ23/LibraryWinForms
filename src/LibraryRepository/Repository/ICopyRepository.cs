@@ -12,5 +12,7 @@ namespace LibraryRepository.Repository
         public List<Copy> GetAllCopies();
         void AddCopy(int bookId, int quantity);
         void DeleteCopy(int copyId, int quantity);
+        void IncrementCopiesAmount(int copyId);
+        void DecrementCopiesAmount(int copyId);
     }
 }

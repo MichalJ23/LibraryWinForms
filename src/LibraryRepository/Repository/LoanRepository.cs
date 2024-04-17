@@ -23,15 +23,20 @@ namespace LibraryRepository.Repository
             _context.Loans.Add(loan);
             _context.SaveChanges();
         }
-        public void DeleteLoan(Loan loan)
+        public void DeleteLoan(int loanId)
         {
-            var loanToRemove = _context.Loans.FirstOrDefault(l => l.Id == loan.Id);
+            var loanToRemove = _context.Loans.FirstOrDefault(l => l.Id == loanId);
 
             if (loanToRemove is not null) 
             {
                 _context.Loans.Remove(loanToRemove);
                 _context.SaveChanges();
             }
+        }
+
+        public Loan GetLoanById(int loanId)
+        {
+            return _context.Loans.FirstOrDefault(l => l.Id == loanId);
         }
     }
 }

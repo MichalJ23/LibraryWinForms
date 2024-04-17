@@ -79,5 +79,26 @@ namespace LibraryRepository.Repository
 
             _context.SaveChanges();
         }
+
+        public Copy GetCopyById(int id)
+        {
+            return _context.Copies.FirstOrDefault(c => c.Id == id);  
+        }
+
+        public void IncrementCopiesAmount(int copyId)
+        {
+            var copy = _context.Copies.FirstOrDefault(c => c.Id == copyId);
+
+            copy.AvailableQuantity++;
+            _context.SaveChanges();
+        }
+
+        public void DecrementCopiesAmount(int copyId)
+        {
+            var copy = _context.Copies.FirstOrDefault(c => c.Id == copyId);
+
+            copy.AvailableQuantity--;
+            _context.SaveChanges();
+        }
     }
 }

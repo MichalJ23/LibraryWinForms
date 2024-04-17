@@ -10,8 +10,9 @@ namespace LibraryRepository.Repository
 {
     internal interface IReaderRepository
     {
-        public List<Reader> GetAllReaders();
+        List<Reader> GetAllReaders();
         void AddReader(Reader reader);
         void DeleteReader(Reader reader);
+        Reader GetReaderById(int id);
     }
 }
