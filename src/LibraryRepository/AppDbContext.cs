@@ -32,7 +32,11 @@ namespace LibraryRepository
             modelBuilder.Entity<Fine>()
                         .HasOne(f => f.Loan)
                         .WithOne(l => l.Fine)
-                        .HasForeignKey<Fine>(f => f.LoanId);
+                        .HasForeignKey<Loan>(l => l.FineId);
+
+            modelBuilder.Entity<Loan>()
+                .Property(l => l.FineId)
+                .IsRequired(false);
         }
 
     }
