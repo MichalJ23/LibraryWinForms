@@ -19,7 +19,7 @@ namespace LibraryRepository.Models
         public int CopyId { get; set; }
         public Copy Copy { get; set; }
 
-        public int FineId { get; set; }
+        public int? FineId { get; set; }
         public Fine Fine { get; set; }
     }
 }

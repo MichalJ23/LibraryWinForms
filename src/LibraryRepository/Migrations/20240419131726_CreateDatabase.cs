@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LibraryRepository.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,21 @@ namespace LibraryRepository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fines",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FineType = table.Column<string>(type: "TEXT", nullable: true),
+                    FineAmount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    LoandId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fines", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,52 +78,35 @@ namespace LibraryRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Loan",
+                name: "Loans",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LoanDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    LoanDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    ReturnDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     ReaderId = table.Column<int>(type: "INTEGER", nullable: false),
                     CopyId = table.Column<int>(type: "INTEGER", nullable: false),
-                    FineId = table.Column<int>(type: "INTEGER", nullable: false)
+                    FineId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Loan", x => x.Id);
+                    table.PrimaryKey("PK_Loans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Loan_Copies_CopyId",
+                        name: "FK_Loans_Copies_CopyId",
                         column: x => x.CopyId,
                         principalTable: "Copies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Loan_Readers_ReaderId",
+                        name: "FK_Loans_Fines_FineId",
+                        column: x => x.FineId,
+                        principalTable: "Fines",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Loans_Readers_ReaderId",
                         column: x => x.ReaderId,
                         principalTable: "Readers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Fines",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    LoanId = table.Column<int>(type: "INTEGER", nullable: false),
-                    FineType = table.Column<string>(type: "TEXT", nullable: true),
-                    FineAmount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    LoandId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fines", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Fines_Loan_LoanId",
-                        column: x => x.LoanId,
-                        principalTable: "Loan",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -119,19 +117,19 @@ namespace LibraryRepository.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fines_LoanId",
-                table: "Fines",
-                column: "LoanId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Loan_CopyId",
-                table: "Loan",
+                name: "IX_Loans_CopyId",
+                table: "Loans",
                 column: "CopyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Loan_ReaderId",
-                table: "Loan",
+                name: "IX_Loans_FineId",
+                table: "Loans",
+                column: "FineId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Loans_ReaderId",
+                table: "Loans",
                 column: "ReaderId");
         }
 
@@ -139,13 +137,13 @@ namespace LibraryRepository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Fines");
-
-            migrationBuilder.DropTable(
-                name: "Loan");
+                name: "Loans");
 
             migrationBuilder.DropTable(
                 name: "Copies");
+
+            migrationBuilder.DropTable(
+                name: "Fines");
 
             migrationBuilder.DropTable(
                 name: "Readers");

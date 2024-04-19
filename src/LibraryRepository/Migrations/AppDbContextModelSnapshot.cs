@@ -29,7 +29,7 @@ namespace LibraryRepository.Migrations
                     b.Property<int>("Genre")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("PublicationDate")
+                    b.Property<DateTime>("PublicationDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -74,16 +74,10 @@ namespace LibraryRepository.Migrations
                     b.Property<string>("FineType")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LoanId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("LoandId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LoanId")
-                        .IsUnique();
 
                     b.ToTable("Fines");
                 });
@@ -97,7 +91,7 @@ namespace LibraryRepository.Migrations
                     b.Property<int>("CopyId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FineId")
+                    b.Property<int?>("FineId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("LoanDate")
@@ -112,6 +106,9 @@ namespace LibraryRepository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CopyId");
+
+                    b.HasIndex("FineId")
+                        .IsUnique();
 
                     b.HasIndex("ReaderId");
 
@@ -146,17 +143,6 @@ namespace LibraryRepository.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("LibraryRepository.Models.Fine", b =>
-                {
-                    b.HasOne("LibraryRepository.Models.Loan", "Loan")
-                        .WithOne("Fine")
-                        .HasForeignKey("LibraryRepository.Models.Fine", "LoanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Loan");
-                });
-
             modelBuilder.Entity("LibraryRepository.Models.Loan", b =>
                 {
                     b.HasOne("LibraryRepository.Models.Copy", "Copy")
@@ -165,6 +151,10 @@ namespace LibraryRepository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LibraryRepository.Models.Fine", "Fine")
+                        .WithOne("Loan")
+                        .HasForeignKey("LibraryRepository.Models.Loan", "FineId");
+
                     b.HasOne("LibraryRepository.Models.Reader", "Reader")
                         .WithMany("Loans")
                         .HasForeignKey("ReaderId")
@@ -172,6 +162,8 @@ namespace LibraryRepository.Migrations
                         .IsRequired();
 
                     b.Navigation("Copy");
+
+                    b.Navigation("Fine");
 
                     b.Navigation("Reader");
                 });
@@ -186,9 +178,9 @@ namespace LibraryRepository.Migrations
                     b.Navigation("Loans");
                 });
 
-            modelBuilder.Entity("LibraryRepository.Models.Loan", b =>
+            modelBuilder.Entity("LibraryRepository.Models.Fine", b =>
                 {
-                    b.Navigation("Fine");
+                    b.Navigation("Loan");
                 });
 
             modelBuilder.Entity("LibraryRepository.Models.Reader", b =>
