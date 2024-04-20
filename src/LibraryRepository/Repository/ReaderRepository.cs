@@ -1,4 +1,5 @@
 ﻿using LibraryRepository.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,20 +25,15 @@ namespace LibraryRepository.Repository
             _context.SaveChanges();
         }
 
-        public void DeleteReader(Reader reader)
-        {
-            var readerToDelete = _context.Readers.FirstOrDefault(r => r.Id == reader.Id);
-
-            if (readerToDelete != null)
-            {
-                _context.Readers.Remove(readerToDelete);
-                _context.SaveChanges();
-            }
-        }
-
         public Reader GetReaderById(int id)
         {
             return _context.Readers.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void UpdateReader(Reader reader)
+        {
+                _context.Entry(reader).State = EntityState.Modified;
+                _context.SaveChanges();
         }
     }
 }

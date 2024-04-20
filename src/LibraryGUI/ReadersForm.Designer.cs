@@ -35,11 +35,15 @@
             textBox_LastName = new TextBox();
             label1 = new Label();
             groupBox2 = new GroupBox();
-            button_deleteReader = new Button();
+            label6 = new Label();
+            label5 = new Label();
+            textBox_lastNameUpdateReader = new TextBox();
+            textBox_firstNameUpdateReader = new TextBox();
+            comboBox1 = new ComboBox();
+            button_updateReader = new Button();
             label4 = new Label();
             dataGridView1 = new DataGridView();
             label3 = new Label();
-            comboBox1 = new ComboBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -54,7 +58,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(14, 281);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(560, 84);
+            groupBox1.Size = new Size(560, 73);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Dodawanie";
@@ -79,7 +83,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(6, 56);
+            label2.Location = new Point(6, 48);
             label2.Name = "label2";
             label2.Size = new Size(143, 15);
             label2.TabIndex = 3;
@@ -87,7 +91,7 @@
             // 
             // textBox_LastName
             // 
-            textBox_LastName.Location = new Point(167, 53);
+            textBox_LastName.Location = new Point(167, 45);
             textBox_LastName.Name = "textBox_LastName";
             textBox_LastName.Size = new Size(159, 23);
             textBox_LastName.TabIndex = 1;
@@ -103,25 +107,69 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(textBox_lastNameUpdateReader);
+            groupBox2.Controls.Add(textBox_firstNameUpdateReader);
             groupBox2.Controls.Add(comboBox1);
-            groupBox2.Controls.Add(button_deleteReader);
+            groupBox2.Controls.Add(button_updateReader);
             groupBox2.Controls.Add(label4);
-            groupBox2.Location = new Point(14, 371);
+            groupBox2.Location = new Point(14, 360);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(560, 53);
+            groupBox2.Size = new Size(560, 112);
             groupBox2.TabIndex = 7;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Usuwanie";
+            groupBox2.Text = "Edytowanie";
             // 
-            // button_deleteReader
+            // label6
             // 
-            button_deleteReader.Location = new Point(337, 14);
-            button_deleteReader.Name = "button_deleteReader";
-            button_deleteReader.Size = new Size(217, 25);
-            button_deleteReader.TabIndex = 4;
-            button_deleteReader.Text = "Usuń czytelnika";
-            button_deleteReader.UseVisualStyleBackColor = true;
-            button_deleteReader.Click += button_deleteReader_Click;
+            label6.AutoSize = true;
+            label6.Location = new Point(6, 80);
+            label6.Name = "label6";
+            label6.Size = new Size(143, 15);
+            label6.TabIndex = 5;
+            label6.Text = "Podaj nazwisko czytelnika";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(6, 51);
+            label5.Name = "label5";
+            label5.Size = new Size(118, 15);
+            label5.TabIndex = 5;
+            label5.Text = "Podaj imię czytelnika";
+            // 
+            // textBox_lastNameUpdateReader
+            // 
+            textBox_lastNameUpdateReader.Location = new Point(167, 77);
+            textBox_lastNameUpdateReader.Name = "textBox_lastNameUpdateReader";
+            textBox_lastNameUpdateReader.Size = new Size(159, 23);
+            textBox_lastNameUpdateReader.TabIndex = 5;
+            // 
+            // textBox_firstNameUpdateReader
+            // 
+            textBox_firstNameUpdateReader.Location = new Point(167, 48);
+            textBox_firstNameUpdateReader.Name = "textBox_firstNameUpdateReader";
+            textBox_firstNameUpdateReader.Size = new Size(159, 23);
+            textBox_firstNameUpdateReader.TabIndex = 5;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(167, 19);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(159, 23);
+            comboBox1.TabIndex = 5;
+            // 
+            // button_updateReader
+            // 
+            button_updateReader.Location = new Point(337, 14);
+            button_updateReader.Name = "button_updateReader";
+            button_updateReader.Size = new Size(217, 25);
+            button_updateReader.TabIndex = 4;
+            button_updateReader.Text = "Zaktualizuj czytelnika";
+            button_updateReader.UseVisualStyleBackColor = true;
+            button_updateReader.Click += button_updateReader_Click;
             // 
             // label4
             // 
@@ -134,9 +182,11 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 61);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.Size = new Size(562, 201);
             dataGridView1.TabIndex = 8;
             // 
@@ -150,19 +200,11 @@
             label3.TabIndex = 16;
             label3.Text = "Zarządzanie czytelnikami";
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(167, 19);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(159, 23);
-            comboBox1.TabIndex = 5;
-            // 
             // ReadersForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(582, 438);
+            ClientSize = new Size(581, 477);
             Controls.Add(label3);
             Controls.Add(dataGridView1);
             Controls.Add(groupBox2);
@@ -188,10 +230,14 @@
         private TextBox textBox_LastName;
         private Label label1;
         private GroupBox groupBox2;
-        private Button button_deleteReader;
+        private Button button_updateReader;
         private Label label4;
         private DataGridView dataGridView1;
         private Label label3;
         private ComboBox comboBox1;
+        private Label label6;
+        private Label label5;
+        private TextBox textBox_lastNameUpdateReader;
+        private TextBox textBox_firstNameUpdateReader;
     }
 }

@@ -11,6 +11,6 @@ namespace LibraryLogic.Services
     {
         public List<Book> GetAllBooks();
         void CreateBook(Book book);
-        void DeleteBook(Book book);
+        public void UpdateBook(Book book);
     }
 }

@@ -22,6 +22,11 @@ namespace LibraryLogic.Services
             return _bookRepository.GetAllBooks();
         }
 
+        public Book GetBookById(int id)
+        {
+            return _bookRepository.GetBookById(id);
+        }
+
         public void CreateBook(Book book)
         {
             if (book is null)
@@ -32,14 +37,23 @@ namespace LibraryLogic.Services
             _bookRepository.AddBook(book);
         }
 
-        public void DeleteBook(Book book)
+        public void UpdateBook(Book book)
         {
-            if (book is null)
-            {
-                throw new ArgumentNullException(nameof(book));
-            }
+            var existingBook = _bookRepository.GetBookById(book.Id);
 
-            _bookRepository.DeleteBook(book);
+            if (existingBook != null)
+            {
+                existingBook.Title = book.Title;
+                existingBook.Author = book.Author;
+                existingBook.Genre = book.Genre;
+                existingBook.PublicationDate = book.PublicationDate;
+
+                _bookRepository.UpdateBook(existingBook);
+            }
+            else
+            {
+                throw new ArgumentException("Książka o podanym ID nie istnieje.");
+            }
         }
     }
 }

@@ -28,6 +28,8 @@ namespace LibraryGUI
             comboBox1.DataSource = _readerService.GetAllReaders();
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
+
+            dataGridView1.Columns["Loans"].Visible = false;
         }
 
         private void button_AddReader_Click(object sender, EventArgs e)
@@ -39,31 +41,47 @@ namespace LibraryGUI
             };
             _readerService.CreateReader(reader);
 
-            MessageBox.Show("Czytelnik została pomyślnie dodana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Czytelnik został pomyślnie dodany.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             dataGridView1.DataSource = _readerService.GetAllReaders();
             comboBox1.DataSource = _readerService.GetAllReaders();
         }
 
-        private void button_deleteReader_Click(object sender, EventArgs e)
+        private void button_updateReader_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex != -1)
             {
-                int readerId = (int)comboBox1.SelectedValue;
+                int selectedReaderId = (int)comboBox1.SelectedValue;
 
-                var reader = new Reader { Id = readerId };
+                var selectedReader = _readerService.GetReaderById(selectedReaderId);
 
-                _readerService.DeleteReader(reader);
+                if (selectedReader != null)
+                {
+                    string newFirstName = string.IsNullOrWhiteSpace(textBox_firstNameUpdateReader.Text) ? selectedReader.FirstName : textBox_firstNameUpdateReader.Text;
+                    string newLastName = string.IsNullOrWhiteSpace(textBox_lastNameUpdateReader.Text) ? selectedReader.LastName : textBox_lastNameUpdateReader.Text;
 
-                comboBox1.DataSource = _readerService.GetAllReaders();
+                    var updatedReader = new Reader
+                    {
+                        Id = selectedReader.Id,
+                        FirstName = newFirstName,
+                        LastName = newLastName
+                    };
 
-                MessageBox.Show("Czytelnik został pomyślnie usunięty.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _readerService.UpdateReader(updatedReader);
 
-                dataGridView1.DataSource = _readerService.GetAllReaders();
+                    MessageBox.Show("Dane czytelnika zostały pomyślnie zaktualizowane.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    dataGridView1.DataSource = _readerService.GetAllReaders();
+                    comboBox1.DataSource = _readerService.GetAllReaders();
+                }
+                else
+                {
+                    MessageBox.Show("Nie znaleziono czytelnika o wybranym ID.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Proszę wybrać czytelnika do usunięcia.", "Brak zaznaczenia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Proszę wybrać czytelnika do aktualizacji.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
