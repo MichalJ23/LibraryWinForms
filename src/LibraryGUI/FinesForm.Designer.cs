@@ -37,16 +37,24 @@
             label2 = new Label();
             addFineBtn = new Button();
             label5 = new Label();
-            dataGridView1 = new DataGridView();
-            groupBox3 = new GroupBox();
-            label7 = new Label();
-            comboBox_reader = new ComboBox();
-            label3 = new Label();
-            button_sumFine = new Button();
+            dataGridView_loans = new DataGridView();
+            dataGridView_fines = new DataGridView();
+            label4 = new Label();
+            label8 = new Label();
+            groupBox2 = new GroupBox();
+            numericUpDown1 = new NumericUpDown();
+            label9 = new Label();
+            textBox1 = new TextBox();
+            comboBox_fineId = new ComboBox();
+            label10 = new Label();
+            button_updateFine = new Button();
+            label11 = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_FineAmount).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_loans).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_fines).BeginInit();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -68,7 +76,7 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(addFineBtn);
             groupBox1.Controls.Add(label5);
-            groupBox1.Location = new Point(12, 259);
+            groupBox1.Location = new Point(12, 515);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(560, 110);
             groupBox1.TabIndex = 26;
@@ -124,6 +132,7 @@
             addFineBtn.TabIndex = 14;
             addFineBtn.Text = "Dodaj karę";
             addFineBtn.UseVisualStyleBackColor = true;
+            addFineBtn.Click += addFineBtn_Click;
             // 
             // label5
             // 
@@ -134,79 +143,143 @@
             label5.TabIndex = 2;
             label5.Text = "Podaj Id wypożyczenia";
             // 
-            // dataGridView1
+            // dataGridView_loans
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 52);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(562, 201);
-            dataGridView1.TabIndex = 25;
+            dataGridView_loans.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_loans.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_loans.Location = new Point(12, 77);
+            dataGridView_loans.Name = "dataGridView_loans";
+            dataGridView_loans.RowHeadersVisible = false;
+            dataGridView_loans.Size = new Size(562, 201);
+            dataGridView_loans.TabIndex = 25;
             // 
-            // groupBox3
+            // dataGridView_fines
             // 
-            groupBox3.Controls.Add(label7);
-            groupBox3.Controls.Add(comboBox_reader);
-            groupBox3.Controls.Add(label3);
-            groupBox3.Controls.Add(button_sumFine);
-            groupBox3.Location = new Point(12, 375);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(560, 80);
-            groupBox3.TabIndex = 28;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Podliczanie kary czytelnika";
+            dataGridView_fines.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView_fines.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView_fines.Location = new Point(12, 308);
+            dataGridView_fines.Name = "dataGridView_fines";
+            dataGridView_fines.RowHeadersVisible = false;
+            dataGridView_fines.Size = new Size(562, 201);
+            dataGridView_fines.TabIndex = 29;
             // 
-            // label7
+            // label4
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(286, 62);
-            label7.Name = "label7";
-            label7.Size = new Size(215, 15);
-            label7.TabIndex = 21;
-            label7.Text = "Kwota do wpłacenia przez czytelnika to:";
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 59);
+            label4.Name = "label4";
+            label4.Size = new Size(82, 15);
+            label4.TabIndex = 30;
+            label4.Text = "Wypożyczenia";
             // 
-            // comboBox_reader
+            // label8
             // 
-            comboBox_reader.FormattingEnabled = true;
-            comboBox_reader.Location = new Point(167, 15);
-            comboBox_reader.Name = "comboBox_reader";
-            comboBox_reader.Size = new Size(160, 23);
-            comboBox_reader.TabIndex = 20;
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 290);
+            label8.Name = "label8";
+            label8.Size = new Size(30, 15);
+            label8.TabIndex = 31;
+            label8.Text = "Kary";
             // 
-            // label3
+            // groupBox2
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(6, 18);
-            label3.Name = "label3";
-            label3.Size = new Size(105, 15);
-            label3.TabIndex = 18;
-            label3.Text = "Podaj Id czytelnika";
+            groupBox2.Controls.Add(numericUpDown1);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(comboBox_fineId);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(button_updateFine);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Location = new Point(12, 631);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(560, 110);
+            groupBox2.TabIndex = 27;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Edytowanie";
             // 
-            // button_sumFine
+            // numericUpDown1
             // 
-            button_sumFine.Location = new Point(337, 14);
-            button_sumFine.Name = "button_sumFine";
-            button_sumFine.Size = new Size(217, 25);
-            button_sumFine.TabIndex = 4;
-            button_sumFine.Text = "Podlicz";
-            button_sumFine.UseVisualStyleBackColor = true;
+            numericUpDown1.Location = new Point(168, 74);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(161, 23);
+            numericUpDown1.TabIndex = 19;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(6, 76);
+            label9.Name = "label9";
+            label9.Size = new Size(97, 15);
+            label9.TabIndex = 18;
+            label9.Text = "Podaj kwotę kary";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(168, 45);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(160, 23);
+            textBox1.TabIndex = 17;
+            // 
+            // comboBox_fineId
+            // 
+            comboBox_fineId.FormattingEnabled = true;
+            comboBox_fineId.Location = new Point(167, 16);
+            comboBox_fineId.Name = "comboBox_fineId";
+            comboBox_fineId.Size = new Size(160, 23);
+            comboBox_fineId.TabIndex = 16;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(6, 48);
+            label10.Name = "label10";
+            label10.Size = new Size(97, 15);
+            label10.TabIndex = 15;
+            label10.Text = "Podaj rodzaj kary";
+            // 
+            // button_updateFine
+            // 
+            button_updateFine.Location = new Point(338, 15);
+            button_updateFine.Margin = new Padding(2);
+            button_updateFine.Name = "button_updateFine";
+            button_updateFine.Size = new Size(217, 23);
+            button_updateFine.TabIndex = 14;
+            button_updateFine.Text = "Zaktualizuj karę";
+            button_updateFine.UseVisualStyleBackColor = true;
+            button_updateFine.Click += button_updateFine_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(6, 19);
+            label11.Name = "label11";
+            label11.Size = new Size(75, 15);
+            label11.TabIndex = 2;
+            label11.Text = "Podaj Id kary";
             // 
             // FinesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(580, 520);
-            Controls.Add(groupBox3);
+            ClientSize = new Size(581, 751);
+            Controls.Add(groupBox2);
+            Controls.Add(label8);
+            Controls.Add(label4);
+            Controls.Add(dataGridView_fines);
             Controls.Add(groupBox1);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridView_loans);
             Controls.Add(label1);
             Name = "FinesForm";
             Text = "Zarządzanie Karami";
+            Load += FinesForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_FineAmount).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_loans).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView_fines).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -219,14 +292,20 @@
         private Label label2;
         private Button addFineBtn;
         private Label label5;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView_loans;
         private NumericUpDown numericUpDown_FineAmount;
         private Label label6;
         private TextBox textBox_FineType;
-        private GroupBox groupBox3;
-        private ComboBox comboBox_reader;
-        private Label label3;
-        private Button button_sumFine;
-        private Label label7;
+        private DataGridView dataGridView_fines;
+        private Label label4;
+        private Label label8;
+        private GroupBox groupBox2;
+        private NumericUpDown numericUpDown1;
+        private Label label9;
+        private TextBox textBox1;
+        private ComboBox comboBox_fineId;
+        private Label label10;
+        private Button button_updateFine;
+        private Label label11;
     }
 }

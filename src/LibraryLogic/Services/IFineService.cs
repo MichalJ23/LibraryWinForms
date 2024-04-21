@@ -1,13 +1,14 @@
 ﻿using LibraryRepository.Models;
+using LibraryRepository.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryRepository.Repository
+namespace LibraryLogic.Services
 {
-    internal interface IFineRepository
+    internal interface IFineService
     {
         public List<Fine> GetAllFines();
         void AddFine(Fine fine);
