@@ -1,4 +1,5 @@
 ﻿using LibraryLogic.Services;
+using LibraryRepository.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,10 +32,12 @@ namespace LibraryGUI
             var availableBooks = _copyService.GetBooksAvailableForLoan();
 
             comboBoxBook_addLoan.Items.Clear();
+            comboBoxBook_addLoan.DisplayMember = "Title";
+            comboBoxBook_addLoan.ValueMember = null;
 
             foreach (var book in availableBooks)
             {
-                comboBoxBook_addLoan.Items.Add(book.Title);
+                comboBoxBook_addLoan.Items.Add(book);
             }
         }
 
@@ -50,9 +53,12 @@ namespace LibraryGUI
         {
             var readers = _readerService.GetAllReaders();
             comboBoxReader_addLoan.Items.Clear();
+            comboBoxReader_addLoan.DisplayMember = "FirstName";
+            comboBoxReader_addLoan.ValueMember = null;
+
             foreach (var reader in readers)
             {
-                comboBoxReader_addLoan.Items.Add(reader.FirstName);
+                comboBoxReader_addLoan.Items.Add(reader);
             }
         }
 
@@ -78,24 +84,26 @@ namespace LibraryGUI
         {
             if (comboBoxReader_addLoan.SelectedItem != null && comboBoxBook_addLoan.SelectedItem != null)
             {
-                int selectedReaderId = -1;
-                int selectedBookId = -1;
+                var selectedReader = (Reader)comboBoxReader_addLoan.SelectedItem;
+                var selectedReaderId = selectedReader.Id;
 
-                // Pobierz ReaderId
-                int selectedReaderIndex = comboBoxReader_addLoan.SelectedIndex;
-                var selectedReader = _readerService.GetAllReaders().ToList()[selectedReaderIndex];
-                selectedReaderId = selectedReader.Id;
-
-                // Pobierz BookId
-                int selectedBookIndex = comboBoxBook_addLoan.SelectedIndex;
-                var selectedBook = _copyService.GetBooksAvailableForLoan().ToList()[selectedBookIndex];
-                selectedBookId = selectedBook.Id;
+                var selectedBook = (Book)comboBoxBook_addLoan.SelectedItem;
+                var selectedBookId = selectedBook.Id;
 
                 var loanDate = dateTimePicker_addLoan.Value;
 
-                _loanService.AddLoan(selectedReaderId, selectedBookId, loanDate);
+                var copyId = _copyService.GetCopyIdByBookId(selectedBookId);
+                var copy = _copyService.GetCopyById(copyId);
 
-                this.loadData();
+                if ( copy.AvailableQuantity <= 0 || copy is null)
+                {
+                    MessageBox.Show("Wybrana książka nie jest dostępna do wypożyczenia.");
+                    return;
+                }
+
+                _loanService.AddLoan(selectedReaderId, selectedBookId, loanDate);
+                MessageBox.Show("Pomyślnie utworzono wypożyczenie.");
+                this.Close();
             }
             else
             {
@@ -103,13 +111,16 @@ namespace LibraryGUI
             }
         }
 
+
+
         private void button_endLoan_Click(object sender, EventArgs e)
         {
             if (comboBoxId_endLoan.SelectedItem != null)
             {
                 int loanId = (int)comboBoxId_endLoan.SelectedItem;
                 _loanService.ReturnLoan(loanId);
-                this.loadData();
+                MessageBox.Show("Pomyślnie zwrócono książkę.");
+                this.Close();
             }
             else
             {
