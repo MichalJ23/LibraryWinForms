@@ -30,14 +30,29 @@ namespace LibraryLogic.Services
             _readerRepository.AddReader(reader);
         }
 
-        public void DeleteReader(Reader reader)
+        public void UpdateReader(Reader reader)
         {
-            if (reader is null)
+            if (reader == null)
             {
                 throw new ArgumentNullException(nameof(reader));
             }
 
-            _readerRepository.DeleteReader(reader);
+            var existingReader = _readerRepository.GetReaderById(reader.Id);
+
+            if (existingReader == null)
+            {
+                throw new ArgumentException("Nie znaleziono czytelnika o podanym ID.", nameof(reader.Id));
+            }
+
+            existingReader.FirstName = string.IsNullOrWhiteSpace(reader.FirstName) ? existingReader.FirstName : reader.FirstName;
+            existingReader.LastName = string.IsNullOrWhiteSpace(reader.LastName) ? existingReader.LastName : reader.LastName;
+
+            _readerRepository.UpdateReader(existingReader);
+        }
+
+        public Reader GetReaderById(int readerId)
+        {
+            return _readerRepository.GetReaderById(readerId);
         }
     }
 }

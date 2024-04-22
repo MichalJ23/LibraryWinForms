@@ -31,6 +31,10 @@ namespace LibraryGUI
             comboBox_ID.ValueMember = "Id";
 
             comboBox_genre.DataSource = Enum.GetValues(typeof(Genre));
+            comboBox_genreUpdateBook.DataSource = Enum.GetValues(typeof(Genre));
+
+            dataGridView1.Columns["Copies"].Visible = false;
+
         }
 
         private void addBookBtn_Click(object sender, EventArgs e)
@@ -55,32 +59,54 @@ namespace LibraryGUI
 
             MessageBox.Show("Książka została pomyślnie dodana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            authorTxtBox.Clear();
+            titleTxtBox.Clear();
+
             dataGridView1.DataSource = _bookService.GetAllBooks();
             comboBox_ID.DataSource = _bookService.GetAllBooks();
         }
 
-        private void button_deleteBook_Click(object sender, EventArgs e)
+        private void button_updateBook_Click_1(object sender, EventArgs e)
         {
             if (comboBox_ID.SelectedIndex != -1)
             {
-                if (!int.TryParse(comboBox_ID.SelectedValue?.ToString(), out int bookId))
+                int selectedBookId = (int)comboBox_ID.SelectedValue;
+
+                var selectedBook = _bookService.GetBookById(selectedBookId);
+
+                if (selectedBook != null)
                 {
-                    MessageBox.Show("Proszę wybrać poprawną książkę do usunięcia.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    string newAuthor = string.IsNullOrWhiteSpace(textBox_authorUpdateBook.Text) ? selectedBook.Author : textBox_authorUpdateBook.Text;
+                    string newTitle = string.IsNullOrWhiteSpace(textBox_titleUpdateBook.Text) ? selectedBook.Title : textBox_titleUpdateBook.Text;
+                    Genre newGenre = (Genre)comboBox_genre.SelectedItem;
+                    DateTime newPublicationDate = dateTimePicker_updateBook.Value;
+
+                    var updatedBook = new Book
+                    {
+                        Id = selectedBook.Id,
+                        Author = newAuthor,
+                        Title = newTitle,
+                        Genre = newGenre,
+                        PublicationDate = newPublicationDate
+                    };
+
+                    _bookService.UpdateBook(updatedBook);
+
+                    dataGridView1.DataSource = _bookService.GetAllBooks();
+
+                    MessageBox.Show("Książka została pomyślnie zaktualizowana.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    textBox_authorUpdateBook.Clear();
+                    textBox_titleUpdateBook.Clear();
                 }
-
-                var book = new Book { Id = bookId };
-
-                _bookService.DeleteBook(book);
-
-                MessageBox.Show("Książka została pomyślnie usunięta.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                dataGridView1.DataSource = _bookService.GetAllBooks();
-                comboBox_ID.DataSource = _bookService.GetAllBooks();
+                else
+                {
+                    MessageBox.Show("Nie znaleziono książki o wybranym ID.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Proszę wybrać książkę do usunięcia.", "Brak zaznaczenia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Proszę wybrać ID książki do zaktualizowania.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

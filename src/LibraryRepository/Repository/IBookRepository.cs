@@ -11,7 +11,8 @@ namespace LibraryRepository.Repository
     internal interface IBookRepository
     {
         public List<Book> GetAllBooks();
+        public Book GetBookById(int id);
         void AddBook(Book book);
-        void DeleteBook(Book book);
+        public void UpdateBook(Book book);
     }
 }

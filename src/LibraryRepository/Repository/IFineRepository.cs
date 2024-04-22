@@ -9,7 +9,7 @@ namespace LibraryRepository.Repository
 {
     internal interface IFineRepository
     {
+        public List<Fine> GetAllFines();
         void AddFine(Fine fine);
-        void RemoveFine(Fine fine);
     }
 }

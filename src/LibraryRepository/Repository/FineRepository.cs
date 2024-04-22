@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryRepository.Repository
 {
-    internal class FineRepository : IFineRepository
+    public class FineRepository : IFineRepository
     {
         private readonly AppDbContext _context;
 
@@ -21,14 +21,29 @@ namespace LibraryRepository.Repository
             _context.SaveChanges();
         }
 
-        public void RemoveFine(Fine fine)
+        public List<Fine> GetAllFines()
         {
-            var fineToRemove = _context.Fines.FirstOrDefault(f => f.Id == fine.Id);
+            return _context.Fines.ToList();
+        }
 
-            if(fineToRemove is not null)
+        public Fine GetFineById(int id)
+        {
+            return _context.Fines.FirstOrDefault(f => f.Id == id);
+        }
+
+        public void UpdateFine(Fine fine)
+        {
+            var existingFine = _context.Fines.FirstOrDefault(f => f.Id == fine.Id);
+            if (existingFine != null)
             {
-                _context.Remove(fine);
+                existingFine.FineType = fine.FineType;
+                existingFine.FineAmount = fine.FineAmount;
+                existingFine.LoandId = fine.LoandId;
                 _context.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentException("Nie znaleziono kary o podanym ID.", nameof(fine.Id));
             }
         }
     }

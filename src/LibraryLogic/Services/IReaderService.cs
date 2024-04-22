@@ -12,6 +12,6 @@ namespace LibraryLogic.Services
     {
         public List<Reader> GetAllReaders();
         void CreateReader(Reader reader);
-        void DeleteReader(Reader reader);
+        public void UpdateReader(Reader reader);
     }
 }

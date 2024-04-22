@@ -12,7 +12,7 @@ namespace LibraryRepository.Repository
     {
         List<Reader> GetAllReaders();
         void AddReader(Reader reader);
-        void DeleteReader(Reader reader);
+        void UpdateReader(Reader reader);
         Reader GetReaderById(int id);
     }
 }
