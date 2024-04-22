@@ -13,5 +13,6 @@ namespace LibraryLogic.Services
         public List<Reader> GetAllReaders();
         void CreateReader(Reader reader);
         public void UpdateReader(Reader reader);
+        string GetReaderFullName(int id);
     }
 }

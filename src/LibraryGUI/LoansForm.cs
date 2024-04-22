@@ -42,7 +42,7 @@ namespace LibraryGUI
         {
             this.LoadReaders();
             this.LoadAvailableBooks();
-            dataGridView1.DataSource = _loanService.GetAllLoans();
+            dataGridView1.DataSource = _loanService.LoadDataForGridView();
             this.LoadLoansCombobox();
         }
 
@@ -94,8 +94,8 @@ namespace LibraryGUI
                 var loanDate = dateTimePicker_addLoan.Value;
 
                 _loanService.AddLoan(selectedReaderId, selectedBookId, loanDate);
-
-                this.loadData();
+                MessageBox.Show("Pomyślnie dodano wypożyczenie");
+                this.Close();   
             }
             else
             {
@@ -109,7 +109,8 @@ namespace LibraryGUI
             {
                 int loanId = (int)comboBoxId_endLoan.SelectedItem;
                 _loanService.ReturnLoan(loanId);
-                this.loadData();
+                MessageBox.Show("Pomyślnie zwrócono książkę");
+                this.Close();
             }
             else
             {
