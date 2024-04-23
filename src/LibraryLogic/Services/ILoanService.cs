@@ -1,4 +1,5 @@
-﻿using LibraryRepository.Models;
+﻿using LibraryGUI.DTOs;
+using LibraryRepository.Models;
 using LibraryRepository.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace LibraryLogic.Services
 {
-    internal interface ILoanService
+    public interface ILoanService
     {
-        List<Loan> GetAllLoans();
+        IEnumerable<Loan> GetAllLoans();
         void AddLoan(int readerId, int bookId, DateTime loanDate);
         void ReturnLoan(int loanId);
+        IEnumerable<LoanDTO> LoadDataForGridView();
     }
 }

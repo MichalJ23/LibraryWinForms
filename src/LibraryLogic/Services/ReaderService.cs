@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryRepository.Models;
@@ -53,6 +54,13 @@ namespace LibraryLogic.Services
         public Reader GetReaderById(int readerId)
         {
             return _readerRepository.GetReaderById(readerId);
+        }
+
+        public string GetReaderFullName(int id)
+        {
+            var reader = _readerRepository.GetReaderById(id);
+
+            return $"{reader.FirstName} {reader.LastName}";
         }
     }
 }

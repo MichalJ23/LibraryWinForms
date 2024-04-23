@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryGUI.DTOs;
 using LibraryRepository.Models;
 using LibraryRepository.Repository;
 
 namespace LibraryLogic.Services
 {
-    public class LoanService
+    public class LoanService : ILoanService
     {
         private readonly LoanRepository _loanRepository;
         private readonly CopyRepository _copyRepository;
         private readonly ReaderRepository _readerRepository;
         private readonly CopyService _copyService;
+        private readonly ReaderService _readerService;
+        
 
         public LoanService()
         {
@@ -21,6 +24,7 @@ namespace LibraryLogic.Services
             _copyRepository = new CopyRepository();
             _readerRepository = new ReaderRepository();
             _copyService = new CopyService();
+            _readerService = new ReaderService();
         }
 
         public IEnumerable<Loan> GetAllLoans()
@@ -65,6 +69,29 @@ namespace LibraryLogic.Services
                 throw new ArgumentException("Invalid loan ID.");
 
             _loanRepository.DeleteLoan(loanId);
+        }
+
+        public IEnumerable<LoanDTO> LoadDataForGridView()
+        {
+            var allLoans = this.GetAllLoans();
+            var loans = new List<LoanDTO>();
+
+            foreach(var loan in allLoans)
+            {
+                var readerFullName = _readerService.GetReaderFullName(loan.ReaderId);
+                var book = _copyService.GetBookByCopyId(loan.CopyId);
+                var loanDTO = new LoanDTO
+                {
+                    LoanId = loan.Id,
+                    LoanDate = loan.LoanDate,
+                    ReturnDate = loan.ReturnDate,
+                    ReaderFullName = readerFullName,      
+                    BookTitle = book.Title,
+                };
+                loans.Add(loanDTO);
+            }
+
+            return loans;
         }
     }
 }

@@ -72,5 +72,14 @@ namespace LibraryLogic.Services
         {
             _copyRepository.DecrementCopiesAmount(copyId);
         }
+
+        public Book GetBookByCopyId(int copyId)
+        {
+            var copy = _copyRepository.GetCopyById(copyId);
+
+            var book = _bookRepository.GetBookById(copy.BookId);
+
+            return book;
+        }
     }
 }

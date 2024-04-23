@@ -2,6 +2,7 @@ using LibraryGUI.DTOs;
 using LibraryLogic.Services;
 using LibraryRepository.Models;
 using System.Data;
+using System.Windows.Forms;
 
 namespace LibraryGUI
 {
@@ -12,17 +13,29 @@ namespace LibraryGUI
         {
             InitializeComponent();
             _loanService = new LoanService();
-
-            dataGridView1.DataSource = _loanService.GetAllLoans();
+            this.LoadData();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
         }
 
+        public void LoadData()
+        {
+            dataGridView1.Refresh();
+            dataGridView1.DataSource = _loanService.LoadDataForGridView();
+
+            // Ustawianie nag³ówków
+            dataGridView1.Columns["LoanId"].HeaderText = "ID";
+            dataGridView1.Columns["BookTitle"].HeaderText = "Tytu³ Ksi¹¿ki";
+            dataGridView1.Columns["ReaderFullName"].HeaderText = "Imiê i nazwisko czytelnika";
+            dataGridView1.Columns["LoanDate"].HeaderText = "Data Wypo¿yczenia";
+            dataGridView1.Columns["ReturnDate"].HeaderText = "Data koñca wypo¿yczenia";
+        }
+
         private void button_ManageLoan_Click(object sender, EventArgs e)
         {
-            LoansForm loansForm = new LoansForm();
+            LoansForm loansForm = new LoansForm(this);
             loansForm.ShowDialog();
         }
 

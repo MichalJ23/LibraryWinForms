@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,14 @@ namespace LibraryGUI
         private readonly CopyService _copyService;
         private readonly ReaderService _readerService;
         private readonly LoanService _loanService;
-
-        public LoansForm()
+        private Form1 _parentForm;
+        public LoansForm(Form1 form1)
         {
             InitializeComponent();
             _copyService = new CopyService();
             _readerService = new ReaderService();
             _loanService = new LoanService();
+            _parentForm =  form1;
             this.loadData();
         }
 
@@ -42,8 +44,15 @@ namespace LibraryGUI
         {
             this.LoadReaders();
             this.LoadAvailableBooks();
-            dataGridView1.DataSource = _loanService.GetAllLoans();
+            dataGridView1.DataSource = _loanService.LoadDataForGridView();
             this.LoadLoansCombobox();
+
+            // Ustawianie nagłówków
+            dataGridView1.Columns["LoanId"].HeaderText = "ID";
+            dataGridView1.Columns["BookTitle"].HeaderText = "Tytuł Książki";
+            dataGridView1.Columns["ReaderFullName"].HeaderText = "Imię i nazwisko czytelnika";
+            dataGridView1.Columns["LoanDate"].HeaderText = "Data Wypożyczenia";
+            dataGridView1.Columns["ReturnDate"].HeaderText = "Data końca wypożyczenia";
         }
 
         private void LoadReaders()
@@ -52,7 +61,7 @@ namespace LibraryGUI
             comboBoxReader_addLoan.Items.Clear();
             foreach (var reader in readers)
             {
-                comboBoxReader_addLoan.Items.Add(reader.FirstName);
+                comboBoxReader_addLoan.Items.Add(reader.FullName);
             }
         }
 
@@ -94,8 +103,9 @@ namespace LibraryGUI
                 var loanDate = dateTimePicker_addLoan.Value;
 
                 _loanService.AddLoan(selectedReaderId, selectedBookId, loanDate);
-
-                this.loadData();
+                MessageBox.Show("Pomyślnie dodano wypożyczenie");
+                _parentForm.LoadData();
+                this.Close();   
             }
             else
             {
@@ -109,7 +119,9 @@ namespace LibraryGUI
             {
                 int loanId = (int)comboBoxId_endLoan.SelectedItem;
                 _loanService.ReturnLoan(loanId);
-                this.loadData();
+                MessageBox.Show("Pomyślnie zwrócono książkę");
+                _parentForm.LoadData();
+                this.Close();
             }
             else
             {

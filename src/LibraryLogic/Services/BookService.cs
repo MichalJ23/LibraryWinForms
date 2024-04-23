@@ -12,9 +12,11 @@ namespace LibraryLogic.Services
     public class BookService : IBookService
     {
         private readonly BookRepository _bookRepository;
+        private readonly CopyRepository _copyRepository;
         public BookService() 
         {
             _bookRepository = new BookRepository();
+            _copyRepository = new CopyRepository();
         }
 
         public List<Book> GetAllBooks()
@@ -54,6 +56,13 @@ namespace LibraryLogic.Services
             {
                 throw new ArgumentException("Książka o podanym ID nie istnieje.");
             }
+        }
+
+        public string GetTitle(int id)
+        {
+            var book = _bookRepository.GetBookById(id);
+
+            return book.Title;
         }
     }
 }
