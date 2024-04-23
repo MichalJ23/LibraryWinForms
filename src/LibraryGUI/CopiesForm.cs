@@ -22,7 +22,7 @@ namespace LibraryGUI
             InitializeComponent();
             _copyService = new CopyService();
             _bookService = new BookService();
-            dataGridView1.DataSource = _copyService.LoadDtosForComboBox();
+            this.LoadDataForCombobox();
         }
         private void CopiesForm_Load(object sender, EventArgs e)
         {
@@ -75,8 +75,7 @@ namespace LibraryGUI
                         _copyService.DeleteCopy(copyId.Value, copiesToDelete);
 
                         MessageBox.Show($"Usunięto {copiesToDelete} egzemplarzy książki.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        dataGridView1.DataSource = _copyService.LoadDtosForComboBox();
+                        this.LoadDataForCombobox();
                     }
                     else
                     {
@@ -93,5 +92,14 @@ namespace LibraryGUI
                 MessageBox.Show("Proszę wybrać książkę.", "Brak wyboru", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void LoadDataForCombobox()
+        {
+            dataGridView1.DataSource = _copyService.LoadDtosForComboBox();
+            dataGridView1.Columns["BookTitle"].HeaderText = "Tytuł książki";
+            dataGridView1.Columns["TotalQuantity"].HeaderText = "Wszystkie egzemplarze";
+            dataGridView1.Columns["AvailableQuantity"].HeaderText = "Dostępne egzemplarze";
+        }
+
     }
 }
