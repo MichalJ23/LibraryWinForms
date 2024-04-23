@@ -1,4 +1,5 @@
-﻿using LibraryRepository.Models;
+﻿using LibraryLogic.DTOs;
+using LibraryRepository.Models;
 using LibraryRepository.Repository;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,6 @@ namespace LibraryLogic.Services
         int GetCopyIdByBookId(int bookId);
         void IncrementAvailableQuantityForCopy(int copyId);
         void DecrementAvailableQuantityForCopy(int copyId);
+        IEnumerable<CopyDTO> LoadDtosForComboBox();
     }
 }
