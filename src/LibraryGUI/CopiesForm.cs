@@ -22,7 +22,7 @@ namespace LibraryGUI
             InitializeComponent();
             _copyService = new CopyService();
             _bookService = new BookService();
-            dataGridView1.DataSource = _copyService.GetAllCopies();
+            dataGridView1.DataSource = _copyService.LoadDtosForComboBox();
         }
         private void CopiesForm_Load(object sender, EventArgs e)
         {
@@ -47,7 +47,7 @@ namespace LibraryGUI
 
                 MessageBox.Show($"Dodano {copiesToAdd} egzemplarzy książki.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                dataGridView1.DataSource = _copyService.GetAllCopies();
+                dataGridView1.DataSource = _copyService.LoadDtosForComboBox();
             }
             else
             {
@@ -76,7 +76,7 @@ namespace LibraryGUI
 
                         MessageBox.Show($"Usunięto {copiesToDelete} egzemplarzy książki.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        dataGridView1.DataSource = _copyService.GetAllCopies();
+                        dataGridView1.DataSource = _copyService.LoadDtosForComboBox();
                     }
                     else
                     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryLogic.DTOs;
 using LibraryRepository.Models;
 using LibraryRepository.Repository;
 
@@ -80,6 +81,31 @@ namespace LibraryLogic.Services
             var book = _bookRepository.GetBookById(copy.BookId);
 
             return book;
+        }
+
+        public IEnumerable<CopyDTO> LoadDtosForComboBox()
+        {
+            var allCopies = _copyRepository.GetAllCopies();
+
+            var allBooks = _bookRepository.GetAllBooks();
+
+            var copyDtos = new List<CopyDTO>();
+
+            foreach (var copy in allCopies)
+            {
+                var correspondingBook = allBooks.FirstOrDefault(b => b.Id == copy.BookId);
+
+                var copyDto = new CopyDTO
+                {
+                    TotalQuantity = copy.TotalQuantity,
+                    AvailableQuantity = copy.AvailableQuantity,
+                    BookTitle = correspondingBook != null ? correspondingBook.Title : "Nieznany tytuł"
+                };
+
+                copyDtos.Add(copyDto);
+            }
+
+            return copyDtos;
         }
     }
 }
