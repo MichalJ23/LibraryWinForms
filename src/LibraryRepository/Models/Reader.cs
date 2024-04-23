@@ -14,5 +14,7 @@ namespace LibraryRepository.Models
         public string LastName { get; set; }
 
         public ICollection<Loan> Loans { get; set; }
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }
