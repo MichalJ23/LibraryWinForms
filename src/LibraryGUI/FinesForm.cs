@@ -24,12 +24,20 @@ namespace LibraryGUI
         }
         private void FinesForm_Load(object sender, EventArgs e)
         {
-            dataGridView_loans.DataSource = _loanService.GetAllLoans();
-            dataGridView_loans.Columns["Fine"].Visible = false;
-            dataGridView_loans.Columns["FineId"].Visible = false;
+            // Ustawianie nagłówków
+            dataGridView_loans.DataSource = _loanService.LoadDataForGridView();
+            dataGridView_loans.Columns["LoanId"].HeaderText = "ID";
+            dataGridView_loans.Columns["BookTitle"].HeaderText = "Tytuł Książki";
+            dataGridView_loans.Columns["ReaderFullName"].HeaderText = "Imię i nazwisko czytelnika";
+            dataGridView_loans.Columns["LoanDate"].HeaderText = "Data Wypożyczenia";
+            dataGridView_loans.Columns["ReturnDate"].HeaderText = "Data końca wypożyczenia";
 
             dataGridView_fines.DataSource = _fineService.GetAllFines();
             dataGridView_fines.Columns["Loan"].Visible = false;
+            dataGridView_fines.Columns["FineType"].HeaderText = "Rodzaj kary";
+            dataGridView_fines.Columns["LoandId"].HeaderText = "ID wypożyczenia";
+            dataGridView_fines.Columns["FineAmount"].HeaderText = "Wielkość naliczonej kary";
+
 
             comboBoxLoanId_addFine.DataSource = _loanService.GetAllLoans();
             comboBoxLoanId_addFine.ValueMember = "Id";
@@ -72,6 +80,9 @@ namespace LibraryGUI
             {
                 MessageBox.Show($"Wystąpił błąd podczas dodawania kary: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            comboBox_fineId.DataSource = _fineService.GetAllFines();
+            comboBox_fineId.ValueMember = "Id";
         }
 
         private void button_updateFine_Click(object sender, EventArgs e)
@@ -115,6 +126,9 @@ namespace LibraryGUI
                 {
                     MessageBox.Show($"Wystąpił błąd podczas aktualizacji kary: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                comboBox_fineId.DataSource = _fineService.GetAllFines();
+                comboBox_fineId.ValueMember = "Id";
             }
         }
 
