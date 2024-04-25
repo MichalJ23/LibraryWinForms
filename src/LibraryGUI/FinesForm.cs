@@ -48,6 +48,11 @@ namespace LibraryGUI
 
         private void addFineBtn_Click(object sender, EventArgs e)
         {
+            if (comboBoxLoanId_addFine.SelectedItem == null)
+            {
+                MessageBox.Show("Proszę wybrać wypożyczenie przed dodaniem kary.", "Brak danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; 
+            }
             int loanId = (int)comboBoxLoanId_addFine.SelectedValue;
             string fineType = textBox_FineType.Text;
             decimal fineAmount = numericUpDown_FineAmount.Value;
