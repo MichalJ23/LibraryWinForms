@@ -87,31 +87,36 @@ namespace LibraryGUI
         {
             if (comboBoxReader_addLoan.SelectedItem != null && comboBoxBook_addLoan.SelectedItem != null)
             {
+                var loanDate = dateTimePicker_addLoan.Value;
+
+                if (loanDate > DateTime.Now)
+                {
+                    MessageBox.Show("Data wypożyczenia nie może być późniejsza niż dzisiejszy dzień.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
+
                 int selectedReaderId = -1;
                 int selectedBookId = -1;
 
-                // Pobierz ReaderId
                 int selectedReaderIndex = comboBoxReader_addLoan.SelectedIndex;
                 var selectedReader = _readerService.GetAllReaders().ToList()[selectedReaderIndex];
                 selectedReaderId = selectedReader.Id;
 
-                // Pobierz BookId
                 int selectedBookIndex = comboBoxBook_addLoan.SelectedIndex;
                 var selectedBook = _copyService.GetBooksAvailableForLoan().ToList()[selectedBookIndex];
                 selectedBookId = selectedBook.Id;
 
-                var loanDate = dateTimePicker_addLoan.Value;
-
                 _loanService.AddLoan(selectedReaderId, selectedBookId, loanDate);
                 MessageBox.Show("Pomyślnie dodano wypożyczenie");
                 _parentForm.LoadData();
-                this.Close();   
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Proszę wybrać czytelnika i książkę przed dodaniem wypożyczenia.");
+                MessageBox.Show("Proszę wybrać czytelnika i książkę przed dodaniem wypożyczenia.", "Ostrzeżenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void button_endLoan_Click(object sender, EventArgs e)
         {
